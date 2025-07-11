@@ -30,12 +30,12 @@
 1. Open the **Command Palette** (`Ctrl+Shift+P`) and start typing `Oh Shit Git: …` to run any command.  
 2. Each command opens the relevant `.md` file in preview mode.
 
-
+<!-- 
 ## Release Notes
 
 ### 0.0.1
 
-- Initial release with 9 “Oh Shit” commands + Markdown previews.
+- Initial release with 9 “Oh Shit” commands + Markdown previews. -->
 
 ---
 
