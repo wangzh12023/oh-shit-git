@@ -4,7 +4,7 @@
   "displayName": "Oh Shit, Git!?!",
   "description": "A VS Code version of \"Oh Shit, Git!?!\" – quick access to Git problem solutions.",
   "version": "0.0.2",
-  "icon": "media/icon.jpg",
+  "icon": "media/icon.png",
   "engines": {
     "vscode": "^1.80.0"
   },
