@@ -1,0 +1,105 @@
+{
+  "name": "oh-shit-git",
+  "displayName": "Oh Shit, Git!?!",
+  "description": "A VS Code version of \"Oh Shit, Git!?!\" – quick access to Git problem solutions.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ohShitGitSidebar",
+          "title": "Oh Shit Git",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "ohShitGitSidebar": [
+        {
+          "id": "ohShitGitView",
+          "name": "Git Help",
+          "when": "true",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ohShitGit.reflog",
+        "title": "Oh Shit Git: Magic time machine"
+      },
+      {
+        "command": "ohShitGit.amend",
+        "title": "Oh Shit Git: Amend last commit"
+      },
+      {
+        "command": "ohShitGit.amendMsg",
+        "title": "Oh Shit Git: Change commit message"
+      },
+      {
+        "command": "ohShitGit.newBranch",
+        "title": "Oh Shit Git: Commit should be on new branch"
+      },
+      {
+        "command": "ohShitGit.wrongBranch",
+        "title": "Oh Shit Git: Committed to wrong branch"
+      },
+      {
+        "command": "ohShitGit.diffEmpty",
+        "title": "Oh Shit Git: Diff shows nothing"
+      },
+      {
+        "command": "ohShitGit.revertOld",
+        "title": "Oh Shit Git: Revert older commit"
+      },
+      {
+        "command": "ohShitGit.undoFile",
+        "title": "Oh Shit Git: Undo file changes"
+      },
+      {
+        "command": "ohShitGit.fuckThis",
+        "title": "Oh Shit Git: Fuck this noise"
+      },
+      {
+        "command": "ohShitGit.showQuickList",
+        "title": "Oh Shit Git: Show Quick List"
+      },
+      {
+        "command": "ohShitGit.openMarkdown",
+        "title": "Oh Shit Git: Open Markdown"
+      }
+    ]
+  },
+  "activationEvents": [],
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "generate-md": "node scripts/generate-md-files.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "vsce": "^2.15.0"
+  }
+}
+
