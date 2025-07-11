@@ -62,15 +62,64 @@ export function activate(context: vscode.ExtensionContext) {
   );
 }
 
+let currentMarkdownUri: vscode.Uri | undefined;
+let currentMarkdownEditor: vscode.TextEditor | undefined;
+
 function openMarkdown(context: vscode.ExtensionContext, filename: string) {
   const fullPath = vscode.Uri.joinPath(context.extensionUri, 'content', filename);
+  
+  // 如果要打开的是同一个文件，直接返回
+  if (currentMarkdownUri && currentMarkdownUri.toString() === fullPath.toString()) {
+    return;
+  }
+  
+  // 关闭之前打开的markdown文档
+
+  if (currentMarkdownUri) {
+    vscode.window.tabGroups.all.forEach(group => {
+      group.tabs.forEach(tab => {
+        // 关闭markdown源文件
+        if (tab.input instanceof vscode.TabInputText) {
+          const uri = tab.input.uri;
+          // 精确匹配当前跟踪的markdown文件
+          if (uri.toString() === currentMarkdownUri!.toString()) {
+            vscode.window.tabGroups.close(tab);
+          }
+        }
+        // 关闭markdown预览
+        else if (tab.input instanceof vscode.TabInputWebview) {
+          // 检查是否是markdown预览标签
+          if (tab.label.includes('Preview') && tab.label.includes(path.basename(currentMarkdownUri!.path, '.md'))) {
+            vscode.window.tabGroups.close(tab);
+          }
+        }
+      });
+    });
+  }
+  
+  // 更新当前跟踪的URI
+  currentMarkdownUri = fullPath;
+  
   vscode.workspace.openTextDocument(fullPath).then((doc: vscode.TextDocument) => {
-    vscode.window.showTextDocument(doc, { preview: true });
-    vscode.commands.executeCommand('markdown.showPreviewToSide', fullPath);
-    vscode.commands.executeCommand('markdown.openPreviewToSide', fullPath);
+    vscode.window.showTextDocument(doc, { preview: true }).then((editor) => {
+      currentMarkdownEditor = editor;
+      vscode.commands.executeCommand('markdown.showPreviewToSide', fullPath).then(() => {
+        // 打开预览后，关闭原来的markdown文档
+        vscode.window.tabGroups.all.forEach(group => {
+          group.tabs.forEach(tab => {
+            if (tab.input instanceof vscode.TabInputText) {
+              const uri = tab.input.uri;
+              // 关闭当前打开的markdown源文件
+              if (uri.toString() === fullPath.toString()) {
+                vscode.window.tabGroups.close(tab);
+              }
+            }
+          });
+        });
+      });
+    });
   });
 }
-
 
 class MarkdownTreeProvider implements vscode.TreeDataProvider<MarkdownItem> {
   constructor(private context: vscode.ExtensionContext) {}

@@ -2,7 +2,7 @@
 
 > Quick access to “Oh Shit, Git!?!” solutions right inside VS Code.
 
-![sidebar](media/icon.svg)  
+<!-- ![](media/icon.jpg)   -->
 
 ## Features
 

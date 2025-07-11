@@ -1,8 +1,9 @@
 {
   "name": "oh-shit-git",
+  "publisher": "wangzh12023",
   "displayName": "Oh Shit, Git!?!",
   "description": "A VS Code version of \"Oh Shit, Git!?!\" – quick access to Git problem solutions.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -10,6 +11,10 @@
     "Other"
   ],
   "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wangzh12023/oh-shit-git"
+  },
   "contributes": {
     "viewsContainers": {
       "activitybar": [
